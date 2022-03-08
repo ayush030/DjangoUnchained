@@ -1,0 +1,20 @@
+{% extends "base_bootstrap.html" %}
+<html lang=en>
+ <head>
+  <meta name="dj4e" content="f9f38a0177f16dcaa0d96bcd5b6d2440"> 
+ </head>
+ 
+
+{% block content %}
+ 
+ <h1>Delete Auto</h1>
+
+ <p>Are you sure you want to delete the breed: {{ breed }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete.">
+</form>
+
+{% endblock %}
+</html>

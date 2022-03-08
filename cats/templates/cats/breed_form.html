@@ -1,0 +1,22 @@
+{% extends "base_bootstrap.html" %}
+<html lang=en>
+ <head>
+  <meta name="dj4e" content="f9f38a0177f16dcaa0d96bcd5b6d2440"> 
+ </head>
+ 
+ <body>
+  {%block content%}
+   
+   <form action="" method="post">
+    {%csrf_token%}
+    <table>
+     {{form.as_table}}
+    </table>
+    
+    <input type="submit" value="Submit">
+    <input type="submit" onclick="window.location={%url 'cats:catList'%}; return false"; value="Cancel">
+   </form>
+  {%endblock%}
+ </body>
+</html>    
+	 

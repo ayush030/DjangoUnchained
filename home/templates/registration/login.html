@@ -1,0 +1,21 @@
+<!--for delete view-->
+<html lang=en>
+ <head>
+  <meta name="dj4e" content="0f450f46df1e06c6737e4ac25603c02a">
+ </head> 
+{% extends "base_menu.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" class="btn btn-primary" value="Login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+{% endblock %}
+</html>

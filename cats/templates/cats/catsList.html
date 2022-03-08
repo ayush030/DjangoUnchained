@@ -1,0 +1,43 @@
+{% extends "base_bootstrap.html" %}
+<html lang=en>
+ <head>
+   <meta name="dj4e" content="f9f38a0177f16dcaa0d96bcd5b6d2440"> 
+ </head>
+ <body>
+   
+   {%block content%}
+   	<h1>Cats List</h1>
+   	<p>
+   	{%if catList%}
+   	  <ul>
+   	  {%for cat in catList%}
+   	    <li>{{cat.nickname}} ({{cat.breed}})
+   	        (<a href="{% url 'cats:catUpdate' cat.id%}">Update</a>|
+   	         <a href="{% url 'cats:catDelete' cat.id%}">Delete</a>)<br/>
+   	    </li>
+   	   {%endfor%}
+   	   </ul>
+   	 
+   	 {%else%}
+   	  No Cats Found
+   	 {%endif%}
+   	 </p>
+   	 
+   	 <p>
+   	 {%if breedCount < 1 %}
+   	   Please add a Breed first
+   	 
+   	 {%else%}
+   	    <a href="{%url 'cats:catCreate'%}">Add a cat</a>
+   	 {%endif%}
+   	 </p> 
+   	 
+   	 <p>
+   	   <a href="{%url 'cats:breedList'%}">View breeds</a> ({{breedCount}})| 
+   	   <a href="{%url 'cats:breedCreate'%}">Add a breed</a>)
+   	 </p>
+   	  
+   {%endblock%}
+  </body>
+</html>  	   
+   	           

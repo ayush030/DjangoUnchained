@@ -1,0 +1,77 @@
+/* This is a partial blocks.css, you need to add more rules
+   to this file to complete the assignment.  Do not add any CSS
+   styling to the original index.htm / start.htm */
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Here is one of many  CSS rules you will need... */
+a.bq:link{
+ color:white;
+ background:blue;
+ width:20%;
+ font-size:30px;
+ text-align: center;
+}
+
+#link {
+ background-size:20%;
+ text-align: center;
+ font-weight: bold;
+ position:relative;
+ top: 2em;
+ 
+}
+
+#one {
+ float:right;
+ position:relative;
+ right:1em;
+ bottom:1em;
+ border:solid;
+ border-color:blue;
+ padding:1em;
+ border-width:5px; 
+ width:25%;
+ margin:20px;
+}
+
+#two {
+ float:right;
+ position:relative;
+ top:1em;
+ right:1em;
+ border:solid;
+ border-color:green;
+ border-width:5px; 
+ padding:1em;
+ width:25%;
+ margin:20px;
+}
+
+#three {
+ float:left;
+ position:relative;
+ top:1em;
+ left:1em;
+ border:solid;
+ border-color:orange;
+ border-width:5px; 
+ padding:1em;
+ width:25%;
+ margin:20px;
+}
+
+#four {
+ float:left;
+ position:relative;
+ top:10em;
+ left:-33em;
+ border:solid;
+ border-color:yellow;
+ border-width:5px; 
+ padding:1em;
+ width:25%;
+ margin:20px;
+}

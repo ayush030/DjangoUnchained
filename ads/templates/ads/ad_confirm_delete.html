@@ -1,0 +1,17 @@
+<!--for delete view-->
+<html lang=en>
+ <head>
+  <meta name="dj4e" content="0f450f46df1e06c6737e4ac25603c02a">
+ </head> 
+ {% extends "base_menu.html" %}
+{% block content %}
+<h1>Delete Ads</h1>
+
+<p>Are you sure you want to delete the ad: {{ ad }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Yes, delete.">
+</form>
+{% endblock %}
+</html>

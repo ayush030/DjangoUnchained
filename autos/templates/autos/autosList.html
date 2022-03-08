@@ -1,0 +1,40 @@
+{%extends "base_bootstrap.html"%}
+
+<html>
+ <head>
+  <meta name="dj4e" content="f9f38a0177f16dcaa0d96bcd5b6d2440"> 
+ </head> 
+ 
+ <body>
+   {%block content%}
+    <h1>Autos List</h1>
+    {%if autosList %}
+    <ul>
+     {%for auto in autosList%}
+      <li>{{auto.nickname}} ({{auto.make}})
+      	  (<a href="{% url 'autos:autosEdit' auto.id %}">Update</a>|
+           <a href="{% url 'autos:autosDelete' auto.id %}">Delete</a>) <br/> 
+           {{auto.comments}}({{auto.mileage}} miles)
+      </li>
+     {%endfor%} 
+    </ul>
+    
+    {%else%}
+     <p>There are no autos in library</p>
+    {%endif%}
+    
+    <p>
+     {%if makeCount > 0%}
+      <a href="{%url 'autos:autosCreate'%}">Add an auto</a>
+     {%else%}
+      Please add a make before you add an auto.
+     {%endif%}
+    </p> 
+    
+    <p>
+      <a href="{% url 'autos:makeList' %}">View makes</a> ({{makeCount}}) |
+      <a href="{% url 'autos:makeCreate'%}">Add a make</a>
+    </p>
+   {%endblock%}
+  </body>
+ </html>   
