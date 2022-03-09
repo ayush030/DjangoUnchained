@@ -7,6 +7,9 @@ from ads.forms import CreateForm, CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from django.http import HttpResponse
+
+from django.db.models import Q
+from django.contrib.humanize.templatetags.humanize import naturaltime
 # Create your views here.
 
 class AdListView(ListView):
@@ -24,7 +27,26 @@ class AdListView(ListView):
              #favorites = [2, 4, ...] using list comprehension
              favorites = [ row['id'] for row in rows ]
           
-          ctx = {'ad_list' : ad_list, 'favorites': favorites}
+          #request.GET is a dictionary object that contains all the arguments recieved  by get method call. 2nd get is dict method(dict.get())   
+          strval =  request.GET.get("search", False)	
+          if strval :
+            # Simple title-only search
+            # objects = Post.objects.filter(title__contains=strval).select_related().order_by('-updated_at')[:10]
+
+            # Multi-field search
+            # If you need to execute more complex queries (for example, queries with OR statements), you can use Q objects.Q is an object used to encapsulate a collection of keyword arguments. These keyword arguments are specified as in “Field lookups” above.
+            # example: __icontains for case-insensitive search
+             query = Q(title__icontains=strval)
+             query.add(Q(text__icontains=strval), Q.OR)
+             ad_list = Ad.objects.filter(query).select_related().order_by('-updated_at')[:10]
+          else :
+             ad_list = Ad.objects.all().order_by('-updated_at')[:10]
+
+         # Augment the ad_list
+          for obj in ad_list:
+              obj.natural_updated = naturaltime(obj.updated_at)
+  
+          ctx = {'ad_list' : ad_list, 'favorites': favorites, 'search': strval}
           
           return render(request, self.template_name, ctx)
           
@@ -98,6 +120,9 @@ class AdCreateView(LoginRequiredMixin, CreateView):
           ad = form.save(commit=False)
           ad.owner = self.request.user
           ad.save()
+          # https://django-taggit.readthedocs.io/en/latest/forms.html#commit-false
+          form.save_m2m()    # Add this for tagme
+          
           return redirect(self.success_url)
           
 
@@ -123,6 +148,8 @@ class AdUpdateView(LoginRequiredMixin, UpdateView):
 
           ad = form.save(commit=False)
           ad.save()
+          # https://django-taggit.readthedocs.io/en/latest/forms.html#commit-false
+          form.save_m2m()    # Add this for tagme
 
           return redirect(self.success_url)
 
